@@ -41,9 +41,9 @@ const displayApi = data => {
           <div class="d-flex justify-content-between">
             <div >
               <h5 class="card-title">${tool.name}</h5>
-              <h6>  ${tool.published_in}</h6>
+              <h6><i class="fa-solid fa-calendar-days"></i> ${tool.published_in}</h6>
             </div>
-            <button onclick = showDetail(${tool}) >Details</button>
+            <div style="background-color: #ff8e794f;  padding: 20px; border-radius: 50%; color: red; "  onclick = showDetail(${tool}) ><i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </div>
         
