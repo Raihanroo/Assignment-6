@@ -13,6 +13,8 @@ const displayFeature = (data) => {
   return featureList;
 }
 
+
+
 const displayApi = data => {
   // console.log(data);
   // step 1 : container element
@@ -49,15 +51,7 @@ const displayApi = data => {
         
       </div>
         `
-    // const featureList = document.createElement('li');
-
-    // tool.features.forEach(item =>{
-    //   featureList.innerHTML = `
-    //   <li>${item}</li>
-    //   `
-    // })
-    // document.querySelector(".feature-container").appendChild(featureList);
-    // step-4: appendChild
+       
 
     toolscontainer.appendChild(toolDiv);
   })
