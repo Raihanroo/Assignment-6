@@ -15,8 +15,28 @@ const displayFeature = (data) => {
 
 
 const modalDataPush = data =>{
-  console.log(data);
-  document.getElementById('modal-title')
+  console.log(data.data.pricing);
+  document.getElementById('modal-title').innerHTML= data.data.description  
+ const modalImg =  document.getElementById('modal-img')
+ modalImg.setAttribute('src', data.data.image_link[0])
+ const modalFeature = document.getElementById('modal-feature')
+ const li = Object.values(data.data.features).map((feature) => `
+ <li>${feature.feature_name}</li>
+ `)
+ modalFeature.innerHTML = li.join("")
+
+ const modalIntegration = document.getElementById('modal-Integration')
+ const ul = (data.data.integrations).map((integrations) => `
+ <li>${integrations}</li>
+ ` ) 
+  modalIntegration.innerHTML = ul.join('')
+
+const modalCost = document.getElementById('modal-cost')
+const freeCost = data.data.pricing.map((price) => `
+<div style="height: 100px; width: 120px; background-color: rgb(255, 255, 255);" class="text-center d-flex align-items-center justify-content-center p-2">${price.price}<br>${price.plan}</div>
+`)
+ modalCost.innerHTML = freeCost.join('')
+
 }
 
 
@@ -59,7 +79,7 @@ const displayApi = data => {
               <h5 class="card-title">${tool.name}</h5>
               <h6><i class="fa-solid fa-calendar-days"></i> ${tool.published_in}</h6>
             </div>
-            <div style="background-color: #ff8e794f;  padding: 20px; border-radius: 50%; color: red; " onclick=showDetails('${tool.id}') data-bs-toggle="modal" data-bs-target="#showDetail"><i class="fa-solid fa-arrow-right"></i></div>
+            <button style="background-color: #ff8e794f;  padding: 20px; border-radius: 50%; color: red; border: none;" onclick=showDetails('${tool.id}') data-bs-toggle="modal" data-bs-target="#showDetail"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
