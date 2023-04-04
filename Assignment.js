@@ -15,7 +15,7 @@ const displayFeature = (data) => {
 
 
 const modalDataPush = data =>{
-  console.log(data.data.pricing);
+  console.log(data.data);
   document.getElementById('modal-title').innerHTML= data.data.description  
  const modalImg =  document.getElementById('modal-img')
  modalImg.setAttribute('src', data.data.image_link[0])
@@ -37,6 +37,10 @@ const freeCost = data.data.pricing.map((price) => `
 `)
  modalCost.innerHTML = freeCost.join('')
 
+const firstTitle = document.getElementById('first-title')
+const modalDescription = document.getElementById('second-title')
+firstTitle.innerHTML = data.data.tool_name
+modalDescription.innerHTML = data.data.description
 }
 
 
