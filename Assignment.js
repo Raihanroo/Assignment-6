@@ -14,13 +14,28 @@ const displayFeature = (data) => {
 }
 
 
+const modalDataPush = data =>{
+  console.log(data);
+  document.getElementById('modal-title')
+}
+
+
+const showDetails = id =>{
+  console.log(id);
+  fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
+  .then(res => res.json())
+  .then(data => modalDataPush(data));
+}
+
+
+
 
 const displayApi = data => {
   // console.log(data);
   // step 1 : container element
   const toolscontainer = document.getElementById('tools-container');
   data.forEach(tool => {
-    console.log(tool)
+    // console.log(tool)
     // step 2: create child for each element
     const toolDiv = document.createElement('div');
     toolDiv.classList.add('col');
@@ -30,7 +45,6 @@ const displayApi = data => {
         <div class="card h-100">
         <img src="${tool.image}" class="card-img-top" alt="...">
           <ol class="feature-container">
-        
           </ol>
         <div class="card-body">
           <p class="card-text">
@@ -45,16 +59,17 @@ const displayApi = data => {
               <h5 class="card-title">${tool.name}</h5>
               <h6><i class="fa-solid fa-calendar-days"></i> ${tool.published_in}</h6>
             </div>
-            <div style="background-color: #ff8e794f;  padding: 20px; border-radius: 50%; color: red; "  onclick = showDetail(${tool}) ><i class="fa-solid fa-arrow-right"></i></div>
+            <div style="background-color: #ff8e794f;  padding: 20px; border-radius: 50%; color: red; " onclick=showDetails('${tool.id}') data-bs-toggle="modal" data-bs-target="#showDetail"><i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </div>
-        
       </div>
         `
-       
+        
+      //  document.getElementById('showDetail').addEventListener()
 
     toolscontainer.appendChild(toolDiv);
   })
 }
 
 loadApi();
+
