@@ -1,116 +1,163 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Assignment-6</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
 
-<style>
-
-#modal-cost div:nth-child(1)
-{
-  color: green;
-  font-weight: 700;
-}
-#modal-cost div:nth-child(2)
-{
-  color: gold;
-  font-weight: 700;
-}
-#modal-cost div:nth-child(3)
-{
-  color: tomato;
-  font-weight: 700;
-}
-</style>
-
-
+    <style>
+      #modal-cost div:nth-child(1) {
+        color: green;
+        font-weight: 700;
+        border-radius: 10px;
+      }
+      #modal-cost div:nth-child(2) {
+        color: gold;
+        font-weight: 700;
+        border-radius: 10px;
+      }
+      #modal-cost div:nth-child(3) {
+        color: tomato;
+        font-weight: 700;
+        border-radius: 10px;
+      }
+      .accuracy {
+        position: absolute;
+        transform: translateX(-100%);
+        right: 5px !important;
+        padding: 8px;
+        border-radius: 8px !important;
+      }
+    </style>
   </head>
 
   <body>
-    <h1 style="text-align: center; margin-top: 20px;">AI Universe Hub</h1>
-    <div class="btn-shot" style="text-align: center; margin-top: 20px;">
-        <button type="button" class="btn btn-danger" style="padding: 10px;">Sort By Date</button>
-    </div>
-
-   <main class="container">
-    <!-- card section -->
-    <section style="margin-top: 50px;">
-        <div id="tools-container" class="row row-cols-1 row-cols-md-3 g-4">
-          </div>
-    </section>
-    <!-- modal -->
-    <section>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showDetail">
-        Launch demo modal
+    <h1 style="text-align: center; margin-top: 20px">AI Universe Hub</h1>
+    <div class="btn-shot" style="text-align: center; margin-top: 20px">
+      <button onclick="sortDate()" type="button" class="btn btn-danger" style="padding: 10px">
+        Sort By Date
       </button>
-
-<!-- Modal -->
-<div  class="modal fade" id="showDetail" tabindex="-1" aria-labelledby="showDetailLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Details</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="row p-4">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card bg-danger  bg-opacity-25">
-            <div class="card-body">
-              <h2 class="card-title" id="modal-title"></h2>
-              <div id="modal-cost" class="d-flex justify-content-between m-3">
-                
-              </div>
-              <div  class="d-flex justify-content-between">
-                <div>
-                  <h4>Feature</h4>
-                  <ul id="modal-feature">
-                   
-                  </ul>
-                </div>
-                <div>
-                  <h4>Integrations</h4>
-                  <ul id="modal-Integration">
-                    <li>helo</li>
-                    <li>hello</li>
-                    <li>hello</li>
-                    <li>hello</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="position-relative">
-                <img id="modal-img" class="w-100" alt="">
-                <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 25px;  transform: translateX(-100%)">
-                  94 % accuracy
-                  <span class="visually-hidden">unread messages</span>
-                </span>
-              </div>
-             <div class="text-center py-4">
-              <h5 id="first-title" class="card-title">Special title treatment</h5>
-              <p id="second-title" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-             </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-    </section>
-   </main>
 
+    <main class="container">
+      <!-- card section -->
+      <section style="margin-top: 50px">
+        <div id="tools-container" class="row g-4">
+          
+        </div>
+        <!-- spinner -->
+        <div id="spinner" class="text-center col-12">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </section>
+      <!-- modal -->
+      <section>
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showDetail">
+        Launch demo modal
+      </button> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="showDetail"
+          tabindex="-1"
+          aria-labelledby="showDetailLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="row p-4">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="card bg-danger bg-opacity-25">
+                    <div class="card-body">
+                      <h2 class="card-title" id="modal-title"></h2>
+                      <div
+                        id="modal-cost"
+                        class="d-flex justify-content-between m-3"
+                      ></div>
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h4>Feature</h4>
+                          <ul id="modal-feature"></ul>
+                        </div>
+                        <div>
+                          <h4>Integrations</h4>
+                          <ul id="modal-Integration"></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="position-relative">
+                        <img id="modal-img" class="w-100" alt="" />
+                        <span
+                          class="accuracy translate-middle badge rounded-pill bg-danger"
+                          style="top: 25px"
+                        >
+                          94 % accuracy
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                      </div>
+                      <div class="text-center py-4">
+                        <h5 id="first-title" class="card-title">
+                          Special title treatment
+                        </h5>
+                        <p id="second-title" class="card-text">
+                          With supporting text below as a natural lead-in to
+                          additional content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- see More  -->
+        <div class="btn-shot" style="text-align: center; margin-top: 20px">
+          <button
+            onclick="showAllUniverses()"
+            type="button"
+            class="btn btn-danger"
+            style="padding: 10px"
+          >
+            See More
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
     <script src="Assignment.js"></script>
   </body>
 </html>
